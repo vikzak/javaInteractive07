@@ -23,8 +23,7 @@ public class GameActionListener implements ActionListener {
             if (board.isFull()){
                 board.getGame().showMessage("Ничья");
                 board.emptyField();
-                Game gameInstance = new Game();
-                gameInstance.initGame();
+
             } else {
                 updateByAiData(board);
             }
@@ -40,8 +39,7 @@ public class GameActionListener implements ActionListener {
         if (board.checkWin()){
             button.getBoard().getGame().showMessage("Вы выиграли!");
             board.emptyField();
-            Game gameInstance = new Game();
-            gameInstance.initGame();
+
         } else {
             board.getGame().passTurn();
         }
@@ -62,8 +60,6 @@ public class GameActionListener implements ActionListener {
         if (board.checkWin()){
             button.getBoard().getGame().showMessage("Компьютер выиграл");
             board.emptyField();
-            Game gameInstance = new Game();
-            gameInstance.initGame();
         } else {
             board.getGame().passTurn();
         }
