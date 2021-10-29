@@ -16,5 +16,7 @@ public class GameButton extends JButton {
          addActionListener(new GameActionListener(rowNum, cellNum, this));
 
     }
-    public GameBoard getBoard(){return board;}
+    public GameBoard getBoard(){
+        return board;
+    }
 }

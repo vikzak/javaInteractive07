@@ -23,7 +23,6 @@ public class GameActionListener implements ActionListener {
             if (board.isFull()){
                 board.getGame().showMessage("Ничья");
                 board.emptyField();
-
             } else {
                 updateByAiData(board);
             }
@@ -46,19 +45,23 @@ public class GameActionListener implements ActionListener {
     }
 
     private void updateByAiData(GameBoard board){
-        int x , y;
-        Random rnd = new Random();
-        do {
-            x = rnd.nextInt(GameBoard.dimension);
-            y = rnd.nextInt(GameBoard.dimension);
-        }
-        while (!board.isTurnable(x,y));
-        board.updateGameField(x,y);
-        int cellIndex = GameBoard.dimension * x +y;
-        board.getButton(cellIndex).setText(Character.toString(board.getGame().getCurrentPlaer().getPlayerSign()));
+        if (!board.isEmpty()) {
+            int x , y;
+            Random rnd = new Random();
+            do {
+                x = rnd.nextInt(GameBoard.dimension);
+                y = rnd.nextInt(GameBoard.dimension);
+            }
+            while (!board.isTurnable(x,y));
+            board.updateGameField(x,y);
+            int cellIndex = GameBoard.dimension * x + y;
+            board.getButton(cellIndex).setText(Character.toString(board.getGame().getCurrentPlaer().getPlayerSign()));
 
+
+        }
         if (board.checkWin()){
             button.getBoard().getGame().showMessage("Компьютер выиграл");
+            board.getGame().passTurn();
             board.emptyField();
         } else {
             board.getGame().passTurn();

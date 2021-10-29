@@ -8,7 +8,7 @@ import java.awt.event.ActionListener;
 // игровое поле
 public class GameBoard extends JFrame {
     static int dimension = 3;   // размерность
-    static int cellSize = 150;   // размер одной клетки
+    static int cellSize = 120;   // размер одной клетки
     private char[][] gameField;    // матрица игры
     private GameButton[] gameButtons; // массив кнопок
 
@@ -71,14 +71,14 @@ public class GameBoard extends JFrame {
     // метод проверки доступности клетки для хода
     boolean isTurnable(int x, int y){
         boolean result = false;
-        if (gameField[y][x] == nullSymbol) result = true;
+        if (gameField[y][x] == nullSymbol) result = true;// y x
         return result;
     }
 
     // обновление матрицы игры после хода
     // @param x и y
     void updateGameField(int x, int y){
-        gameField[y][x] = game.getCurrentPlaer().getPlayerSign();
+        gameField[y][x] = game.getCurrentPlaer().getPlayerSign(); // Y X
     }
 
     // проверка победы
@@ -90,6 +90,7 @@ public class GameBoard extends JFrame {
         }
         return result;
     }
+
 
     // проверка по столбцам и линиям
     private boolean checkWinLines(char playerSymbol){
@@ -116,16 +117,16 @@ public class GameBoard extends JFrame {
     private boolean checkWinDiagonals(char playerSymbol) {
         boolean diagL = true;
         boolean diagR = true;
+        boolean result = false;
         /// Беру из 2-го урока.
-        for (int i = 0, j = 0; i == j && i < dimension && j < dimension; i++, j++) {
-            diagL &= (gameField[i][j] == playerSymbol);
-            diagR &= (gameField[i][dimension - 1 - j] == playerSymbol);
+        for (int i = 0; i < dimension;i++) {
+            diagL &= (gameField[i][i] == playerSymbol);
+            diagR &= (gameField[i][dimension - 1 - i] == playerSymbol);
         }
-
         if (diagL || diagR) {
-            return true;
+            result = true;
         }
-        return false;
+        return result;
     }
 
     // метод проверки заполненности поля
@@ -133,10 +134,22 @@ public class GameBoard extends JFrame {
         boolean result = true;
         for (int i = 0; i < dimension; i++) {
             for (int j = 0; j < dimension; j++) {
-                if (gameField[i][i] == nullSymbol)
+                if (gameField[i][j] == nullSymbol)
                     result = false;
             }
 
+        }
+        return result;
+    }
+
+    boolean isEmpty() {
+        boolean result = true;
+        for (int i = 0; i < dimension; i++) {
+            for (int j = 0; j < dimension; j++) {
+                if (gameField[i][j] != nullSymbol) {
+                    result = false;
+                }
+            }
         }
         return result;
     }

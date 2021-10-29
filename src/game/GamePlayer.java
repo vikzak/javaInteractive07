@@ -9,9 +9,9 @@ public class GamePlayer {
         this.realPlayer = isRealPlayer;
     }
 
-/*    public boolean isRealPlayer() {
+   public boolean isRealPlayer() {
         return realPlayer;
-    }*/
+    }
 
     public char getPlayerSign() {
         return playerSign;
